@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<main class="profile-view">
+  <section class="card profile-card">
+    <header class="profile-header">
+      <div class="brand-badge">S</div>
+      <h2>Meu perfil</h2>
+      <p class="muted">{{ current_user.email }}</p>
+    </header>
+
+    <dl class="profile-data">
+      <div class="row">
+        <dt>Nome</dt>
+        <dd>{{ profile.name or '—' }}</dd>
+      </div>
+      <div class="row">
+        <dt>E-mail</dt>
+        <dd>{{ profile.email or '—' }}</dd>
+      </div>
+      {# adicione outros campos se tiver: #}
+      {# <div class="row"><dt>Telefone</dt><dd>{{ profile.phone }}</dd></div> #}
+    </dl>
+
+    <div class="profile-actions">
+      <a class="btn btn-outline" href="{{ url_for('users.dashboard') }}">Voltar</a>
+      <a class="btn btn-primary" href="{{ url_for('users.settings') }}">Editar perfil</a>
+    </div>
+  </section>
+</main>
+{% endblock %}
+

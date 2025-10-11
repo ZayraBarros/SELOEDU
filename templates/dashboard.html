@@ -1,8 +1,67 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="dashboard-container">
-    <div class="dashboard-welcome">
-        <p>Bem-vindo, {{ current_user.email if current_user.is_authenticated else 'Usuário' }}!</p>
-    </div>
-</div>
+<main class="dashboard">
+  <nav class="dashboard-nav container">
+    <a class="brand" href="{{ url_for('users.dashboard') }}">
+      <span class="brand-badge">S</span> SELOEDU
+    </a>
+    <ul class="menu">
+      <li>
+        <a href="{{ url_for('users.dashboard') }}"
+           class="{{ 'active' if request.endpoint == 'users.dashboard' else '' }}">
+           Dashboard
+        </a>
+      </li>
+
+      {# A listagem de usuários: se a rota for /users, use href direto #}
+      <li>
+        <a href="/users"
+           class="{{ 'active' if request.path == '/users' else '' }}">
+           Usuários
+        </a>
+      </li>
+
+      {# Editar perfil: pelo log, o endpoint existente é users.settings #}
+      <li>
+        <a href="{{ url_for('users.settings') }}"
+           class="{{ 'active' if request.endpoint == 'users.settings' else '' }}">
+           Editar perfil
+        </a>
+      </li>
+
+      <li><a href="{{ url_for('auth.logout') }}">Sair</a></li>
+    </ul>
+  </nav>
+
+  <section class="container dashboard-grid">
+    <article class="card welcome">
+      {% with msg = get_flashed_messages() %}
+        {% if msg %}
+          <div class="alert success">{{ msg[0] }}</div>
+        {% endif %}
+      {% endwith %}
+
+      <h2>Bem-vindo, {{ current_user.email }}!</h2>
+      <p class="muted">Aqui você acompanha atalhos e resumos do seu ambiente.</p>
+
+      <div class="quick-actions">
+        <a class="btn btn-primary" href="/users">Gerenciar usuários</a>
+        <a class="btn btn-outline" href="{{ url_for('users.settings') }}">Editar perfil</a>
+      </div>
+    </article>
+
+    <article class="card kpi">
+      <h3>Últimos acessos</h3>
+      <p class="metric">128</p>
+      <small class="muted">nas últimas 24h</small>
+    </article>
+
+    <article class="card kpi">
+      <h3>Treinamentos ativos</h3>
+      <p class="metric">12</p>
+      <small class="muted">em andamento</small>
+    </article>
+  </section>
+</main>
 {% endblock %}
+
