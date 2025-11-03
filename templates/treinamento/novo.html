@@ -1,0 +1,50 @@
+<!-- templates/treinamento/novo.html -->
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8">
+    <title>Novo Treinamento</title>
+  </head>
+  <body>
+    <h1>Novo Treinamento</h1>
+
+    <form action="{{ url_for('treinamento.novo_post') }}" method="post">
+      <div>
+        <label for="titulo">Título</label><br>
+        <input id="titulo" name="titulo" type="text" required>
+      </div>
+
+      <div>
+        <label for="descricao">Descrição</label><br>
+        <textarea id="descricao" name="descricao" rows="4"></textarea>
+      </div>
+
+      <div>
+        <label for="carga_horaria">Carga horária (em horas)</label><br>
+        <input id="carga_horaria" name="carga_horaria" type="number" min="0" value="0">
+      </div>
+
+      <div>
+        <label for="data_inicio">Data de início</label><br>
+        <input id="data_inicio" name="data_inicio" type="date">
+      </div>
+
+      <div>
+        <label for="data_fim">Data de fim</label><br>
+        <input id="data_fim" name="data_fim" type="date">
+      </div>
+
+      <div>
+        <label for="status">Status</label><br>
+        <select id="status" name="status">
+          <option value="ativo">ativo</option>
+          <option value="inativo">inativo</option>
+        </select>
+      </div>
+
+      <br>
+      <button type="submit">Salvar</button>
+      <a href="{{ url_for('treinamento.listar') }}">Voltar</a>
+    </form>
+  </body>
+</html>

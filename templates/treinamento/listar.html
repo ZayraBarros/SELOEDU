@@ -1,0 +1,42 @@
+<!-- templates/treinamento/listar.html -->
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8">
+    <title>Treinamentos - Listar</title>
+  </head>
+  <body>
+    <h1>Treinamentos</h1>
+
+    <p><a href="{{ url_for('treinamento.novo_form') }}">Novo treinamento</a></p>
+
+    {% if treinamentos %}
+    <table border="1" cellpadding="6" cellspacing="0">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Título</th>
+          <th>Carga Horária</th>
+          <th>Início</th>
+          <th>Fim</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for t in treinamentos %}
+        <tr>
+          <td>{{ t.id }}</td>
+          <td>{{ t.titulo }}</td>
+          <td>{{ t.carga_horaria }}</td>
+          <td>{{ t.data_inicio or "" }}</td>
+          <td>{{ t.data_fim or "" }}</td>
+          <td>{{ t.status }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+      <p>Nenhum treinamento cadastrado.</p>
+    {% endif %}
+  </body>
+</html>
