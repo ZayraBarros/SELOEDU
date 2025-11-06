@@ -1,3 +1,4 @@
+import os
 from flask import Flask, render_template
 from routes.users import user_bp
 from routes.auth import auth_bp
@@ -10,6 +11,9 @@ from config import DevelopmentConfig
 app = Flask(__name__)
 app.config.from_object(DevelopmentConfig)
 
+if not os.path.exists(app.config['UPLOAD_FOLDER']):
+    os.makedirs(app.config['UPLOAD_FOLDER'])
+    
 db.init_app(app)
 login_manager.init_app(app)
 mail.init_app(app)

@@ -1,7 +1,9 @@
 from flask import Blueprint
 from flask_login import login_required
 from views import users as users_views
-from views.profile import profile
+# from views.profile import profile
+from views.profile import profile_view, profile_edit
+
 
 user_bp = Blueprint('users', __name__, template_folder='templates')
 
@@ -14,7 +16,9 @@ user_bp.route('/create', endpoint='create', methods=['GET', 'POST'])(user_view.c
 user_bp.route('/<int:user_id>', endpoint='show', methods=['GET'])(user_view.view_user)
 user_bp.route('/<int:user_id>/edit', endpoint='edit', methods=['GET', 'POST'])(user_view.edit_user)
 user_bp.route('/<int:user_id>/delete', endpoint='delete', methods=['POST'])(user_view.delete_user)
-user_bp.route('/profile', endpoint='profile', methods=['GET', 'POST'])(profile)
+user_bp.route('/profile', endpoint='profile', methods=['GET'])(profile_view)
+user_bp.route('/profile/edit', endpoint='profile_edit', methods=['GET', 'POST'])(profile_edit)
+
 
 @user_bp.route('/settings', endpoint='settings')
 @login_required

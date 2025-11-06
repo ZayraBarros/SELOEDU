@@ -22,5 +22,7 @@ class DevelopmentConfig(Config):
 	MAIL_USERNAME = os.environ.get('MAIL_USERNAME', '')
 	MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD', '')
 	MAIL_DEFAULT_SENDER = os.environ.get('MAIL_DEFAULT_SENDER', 'newpassword@seloedu.com')
-
-
+	
+	UPLOAD_FOLDER = os.path.join(os.path.dirname(__file__), 'static', 'uploads')
+	THUMBNAIL_SIZE = (200, 200)
+	MAX_CONTENT_LENGTH = 5 * 1024 * 1024  # 5 MB
